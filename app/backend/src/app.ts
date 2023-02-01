@@ -1,15 +1,18 @@
 import * as express from 'express';
+import UserController from './controller/user.controller';
 
 class App {
   public app: express.Express;
+  public controller;
 
   constructor() {
     this.app = express();
+    this.controller = new UserController();
 
     this.config();
 
     // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
   }
 
   private config():void {
@@ -22,6 +25,7 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.post('/login', this.controller.getLogin);
   }
 
   public start(PORT: string | number):void {
