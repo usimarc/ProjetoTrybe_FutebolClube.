@@ -1,5 +1,6 @@
 import * as express from 'express';
 import UserController from './controller/user.controller';
+import { validateUser } from './middleware/validation';
 
 class App {
   public app: express.Express;
@@ -25,7 +26,8 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    this.app.post('/login', this.controller.getLogin);
+    this.app.post('/login', validateUser, this.controller.getLogin);
+    this.app.get('/login/validate', this.controller.getAccess);
   }
 
   public start(PORT: string | number):void {
