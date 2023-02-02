@@ -1,6 +1,7 @@
 import * as express from 'express';
 import UserController from './controller/user.controller';
 import { validateUser } from './middleware/validation';
+import teamRouter from './routes/teamRoutes';
 
 class App {
   public app: express.Express;
@@ -28,6 +29,7 @@ class App {
     this.app.use(accessControl);
     this.app.post('/login', validateUser, this.controller.getLogin);
     this.app.get('/login/validate', this.controller.getAccess);
+    this.app.use('/teams', teamRouter);
   }
 
   public start(PORT: string | number):void {
