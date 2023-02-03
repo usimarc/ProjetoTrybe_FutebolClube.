@@ -5,6 +5,8 @@ import leaderRouter from './routes/LeaderBoardRoute';
 import matchRouter from './routes/MatchRoutes';
 import teamRouter from './routes/teamRoutes';
 
+// Esse projeto eu tive muita dificuldades e precisei de muita ajuda e explicação do Giovani
+
 class App {
   public app: express.Express;
   public controller;
